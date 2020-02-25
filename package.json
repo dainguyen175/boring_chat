@@ -1,0 +1,23 @@
+{
+  "name": "boring_chat",
+  "version": "1.0.0",
+  "description": "boring",
+  "main": "server.js",
+  "scripts": {
+    "test": " "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dainguyen175/boring_chat.git"
+  },
+  "author": "Dai Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dainguyen175/boring_chat/issues"
+  },
+  "homepage": "https://github.com/dainguyen175/boring_chat#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ress": "^2.0.4"
+  }
+}
