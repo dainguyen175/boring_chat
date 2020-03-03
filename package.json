@@ -4,9 +4,8 @@
   "description": "boring",
   "main": "server.js",
   "scripts": {
-    "test": " ",
-    "start": "babel-node server.js",
-    "build": "babel A -d B"
+    "test": "echo \"Error: no test specified\" && exit with 1",
+    "start": "babel-node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
   "homepage": "https://github.com/dainguyen175/boring_chat#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^4.13.9",
     "ress": "^2.0.4"
   },
   "devDependencies": {
