@@ -12,4 +12,10 @@ let ContactSchema= new Schema({
   deletedAt: {type: Number, default: Date.null}
 });
 
-module.exports = mongoose.model("contact", UserSchema);
+ContactSchema.statics = {
+  createNew(item) {
+    return this.create(item);
+  }
+}; 
+
+module.exports = mongoose.model("contact", ContactSchema);
