@@ -3,6 +3,7 @@ import expressEjsExtend from "express-ejs-extend";
 
 /**
  * Config new engine for app
+ * @param app from exactly express module
  */
 let configViewEngine = (app) =>{
   app.use(express.static("./src/public"))
@@ -11,4 +12,4 @@ let configViewEngine = (app) =>{
   app.set("views", "./src/views");
 };
 
-module.exports= configViewEngine;
+module.exports= configViewEngine; 
