@@ -13,7 +13,7 @@ let UserSchema= new Schema({
   local: {
     email: {type: String, trim: true},
     password: String,
-    isActived: {type: Boolean, default: false },
+    isActive: {type: Boolean, default: false },
     verifyTyoken: String
   },
   facebook: {
@@ -27,8 +27,18 @@ let UserSchema= new Schema({
     email: {type: String, trim: false}
   },
   createdAt: {type: Number, default: Date.now},
-  updatedAt: {type: Number, default: Date.null},
-  deletedAt: {type: Number, default: Date.null}
+  updatedAt: {type: Number, default: null},
+  deletedAt: {type: Number, default: null}
 });
+
+UserSchema.statics = {
+  createNew(item) {
+    return this.create(item);
+  },
+
+  findByEmail(email) {
+    return this.findOne({"local.email": email}).exec(); 
+  }
+}; 
 
 module.exports = mongoose.model("user", UserSchema);
