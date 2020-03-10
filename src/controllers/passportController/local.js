@@ -28,11 +28,11 @@ let initPassportLocal = () => {
       if(! checkPassword){
         return done(null, false, req.flash("errors", transErrors.login_failed ));
       }
-
-      return done(null, user, req.flash("success"), transSuccess.loginSuccess(user.username))
+    
+      return done(null, user, req.flash("success", transSuccess.loginSuccess(user.username)));
     }catch(error){
       console.log(error);
-      return done(null, false, req.flash("errors"), transErrors.server_error);
+      return done(null, false, req.flash("errors", transErrors.server_error));
     }
   }));
 
@@ -41,6 +41,8 @@ let initPassportLocal = () => {
     done(null, user._id);
   });
 
+  // this is called by passport.session()
+  // return userInfo to req.user
   passport.deserializeUser((id, done)=>{
     userModel.findUserById(id)
       .then(user => {
