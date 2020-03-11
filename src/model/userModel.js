@@ -53,6 +53,10 @@ UserSchema.statics = {
     return this.findById(id).exec();
   },
 
+  findByFacebookID(uid){
+    return this.findOne({ "facebook.uid" : uid}).exec();
+  },
+
   verify(token){
     return this.findOneAndUpdate(
       {"local.verifyToken": token},
