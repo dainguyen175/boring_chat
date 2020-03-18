@@ -1,5 +1,6 @@
 
 import mongoose from "mongoose";
+import { contact } from "../services";
 
 let Schema= mongoose.Schema;
 
@@ -15,6 +16,19 @@ let ContactSchema= new Schema({
 ContactSchema.statics = {
   createNew(item) {
     return this.create(item);
+  },
+
+  /**
+   * Find all items related with users
+   * @param {String} userId 
+   */
+  findAllByUser (userId) {
+    return this.find({
+      $or: [
+        {"userId": userId},
+        {"contactId": userId}
+      ]
+    }).exec();
   }
 }; 
 
