@@ -1,4 +1,3 @@
-
 function removeRequestContact () {
   $(".user-remove-request-contact").bind("click", function() {
     let targetId = $(this).data("uid");
@@ -12,9 +11,21 @@ function removeRequestContact () {
           $("#find-user").find(`div.user-add-new-contact[data-uid = ${targetId}]`).css("display", "inline-block");
           
           decreaseNumberNotifContact("count-request-contact-sent");
-          // xử lý real time 
+          socket.emit("remove-request-contact", {contactId: targetId});
+
         }
       }
     })
   });
 }
+
+socket.on("response-remove-request-contact", function(user){
+  $(".noti_content").find(`span[data-uid= ${user.id}]`).remove();
+  
+  // Xoá ở modal yêu cầu kết bạn
+
+  decreaseNumberNotifContact("count-request-contact-received");
+
+  decreaseNumberNotification("noti_contact_counter");
+  decreaseNumberNotification("noti_counter");
+});
