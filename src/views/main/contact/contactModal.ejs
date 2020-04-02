@@ -15,7 +15,7 @@
                                 (<em><%=countAllContacts %></em> )
                             </span>
                         <% } else {  %>
-                            <span class="show-number-contacts count-contacts ">
+                            <span class="show-number-contacts count-contacts">
                             </span>
                         <% } %>
                     </a></li>
@@ -26,7 +26,7 @@
                                 (<em><%=countAllContactsSent %></em> )
                             </span>
                         <% } else { %>
-                            <span class="show-number-contacts count-request-contact-sent ">
+                            <span class="show-number-contacts count-request-contact-sent">
                             </span>
                         <% } %>
                     </a></li>
@@ -37,10 +37,9 @@
                                 (<em><%=countAllContactsReceived %></em> )
                             </span>
                         <% }  else { %>
-                            <span class="show-number-contacts count-request-contact-received ">
+                            <span class="show-number-contacts count-request-contact-received">
                             </span>
                         <% } %>
-                        
                     </a></li>
                 </ul>
                 <div class="tab-content">
@@ -101,7 +100,7 @@
                     </div>
                     <div id="request-contact-sent" class="tab-pane fade">
                         <div class="find-user-bottom">
-                            <ul class="contactList">
+                             <ul class="contactList">
                                 <% contactsSent.forEach( function(user){ %>
                                     <li class="_contactList" data-uid="<%= user._id %>">
                                         <div class="contactPanel">

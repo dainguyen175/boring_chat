@@ -2,7 +2,6 @@ import contactModel from "./../model/contactModel";
 import userModel from "./../model/userModel";
 import notificationModel from "./../model/notificationModel";
 import _ from "lodash";
-import { contact } from ".";
 
 const LIMIT_NUMBER_TAKEN= 10;
 
@@ -88,7 +87,6 @@ let getContactsSent = (currentUserId) =>{
       let users = contacts.map(async (contact) => {
         return await userModel.getNormalUserDataById(contact.contactId);
       });
-
       resolve( await Promise.all(users));
     } catch (error) {
       reject(error);
@@ -145,6 +143,11 @@ let countAllContactsReceived = (currentUserId) => {
   })
 };
 
+/**
+ * Read more contact, 10 items one time
+ * @param {string} currentUserId 
+ * @param {number} skipNumberContacts 
+ */
 let readMoreContacts = (currentUserId, skipNumberContacts) => {
   return new Promise(async (resolve, reject) =>{
     try {
@@ -160,28 +163,32 @@ let readMoreContacts = (currentUserId, skipNumberContacts) => {
       
       resolve( await Promise.all(users));
     } catch (error) {
-      reject (error);
+      reject (error); 
     }
   });
 };
 
+/**
+ * Read more contact sent, 10 items one time
+ * @param {string} currentUserId 
+ * @param {number} skipNumberContacts 
+ */
 let readMoreContactsSent = (currentUserId, skipNumberContacts) => {
   return new Promise(async (resolve, reject) =>{
     try {
       let newContacts = await contactModel.readMoreContactsSent(currentUserId, skipNumberContacts, LIMIT_NUMBER_TAKEN);
       
       let users = newContacts.map(async (contact) => {
-        if (contact.contactId == currentUserId){
-          return await userModel.getNormalUserDataById(contact.contactId);
-        };
+        return await userModel.getNormalUserDataById(contact.contactId);
       });
       
       resolve( await Promise.all(users));
     } catch (error) {
-      reject (error);
+      reject (error); 
     }
   });
 };
+
 
 let readMoreContactsReceived = (currentUserId, skipNumberContacts) => {
   return new Promise(async (resolve, reject) =>{
