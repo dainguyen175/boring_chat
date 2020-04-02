@@ -4,7 +4,7 @@ function callFindUsers (element){
     let regexKeyword = new RegExp(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/);
       
     if (!keyword.length){
-      alertify.notify("Chưa nhập nội dung tìm kiếm", "error", 5);
+      alertify.notify("Bạn chưa nhập nội dung tìm kiếm.", "error", 5);
       return false;
     }
 
@@ -16,7 +16,7 @@ function callFindUsers (element){
     $.get(`/contact/find-users/${keyword}`, function(data) {
       $("#find-user ul").html(data);
       addContact(); // js/addContact.js
-      removeRequestContact(); // js/removeRequestContact.js
+      removeRequestContactSent(); // js/removeRequestContactSent.js
     });
   };
 };
