@@ -96,7 +96,7 @@ UserSchema.statics = {
     }, {_id: 1, username: 1, address: 1, avatar: 1}).exec();
   },
 
-  getNormalUserDataById (id, ){
+  getNormalUserDataById (id ){
     return this.findById(id,{_id: 1, username: 1, address: 1, avatar: 1}).exec();
   },
 }; 
@@ -106,7 +106,7 @@ UserSchema.methods = {
     // return a promise has result is true or false
     return bcrypt.compare(password, this.local.password);  
   }
-}
+} 
 
 module.exports = mongoose.model("user", UserSchema);
 

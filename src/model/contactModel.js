@@ -1,6 +1,5 @@
 
 import mongoose from "mongoose";
-import { contact } from "../services";
 
 let Schema= mongoose.Schema;
 
@@ -150,6 +149,12 @@ ContactSchema.statics = {
     }).exec();
   },
 
+  /**
+   * Read more contact by user_id, skip, limit
+   * @param {string} userId 
+   * @param {number} skip
+   * @param {number} limit 
+   */
   readMoreContacts ( userId, skip, limit) {
     return this.find({
       $and: [
@@ -163,12 +168,12 @@ ContactSchema.statics = {
   },
 
   /**
-   * Read more contacts sent ,10 item
+   * Read more contact sent by user_id, skip, limit
    * @param {string} userId 
-   * @param {number} skip 
+   * @param {number} skip
    * @param {number} limit 
    */
-  readMoreContactsSent ( userId, skip, limit) {
+  readMoreContactsSent( userId, skip, limit) {
     return this.find({
       $and: [
         {"userId": userId },
@@ -194,3 +199,4 @@ ContactSchema.statics = {
 }; 
 
 module.exports = mongoose.model("contact", ContactSchema);
+ 
