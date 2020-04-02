@@ -60,6 +60,20 @@ let removeRequestContactSent = (currentUserId, contactId) =>{
   });
 };
 
+let removeRequestContactReceived = (currentUserId, contactId) =>{
+  return new Promise(async (resolve, reject)=>{
+    let removeReq = await contactModel.removeRequestContactReceived( currentUserId, contactId);
+    if ( removeReq.result.n === 0){
+      return reject(false);
+    }
+
+    // // remove notification Chức năng chưa muốn làm 
+    // let notifTypeAddContact = notificationModel.types.ADD_CONTACT
+    // await notificationModel.model.removeRequestContactReceivedNotification(currentUserId, contactId, notifTypeAddContact);
+    resolve(true);
+  });
+};
+
 let getContacts = (currentUserId) =>{
   return new Promise(async (resolve, reject)=>{
     try {
@@ -223,4 +237,5 @@ module.exports = {
   readMoreContacts: readMoreContacts,
   readMoreContactsSent: readMoreContactsSent,
   readMoreContactsReceived: readMoreContactsReceived,
+  removeRequestContactReceived: removeRequestContactReceived,
 };
