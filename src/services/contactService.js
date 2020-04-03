@@ -67,9 +67,28 @@ let removeRequestContactReceived = (currentUserId, contactId) =>{
       return reject(false);
     }
 
-    // // remove notification Chức năng chưa muốn làm 
+    // remove notification Chức năng chưa muốn làm 
     // let notifTypeAddContact = notificationModel.types.ADD_CONTACT
-    // await notificationModel.model.removeRequestContactReceivedNotification(currentUserId, contactId, notifTypeAddContact);
+    // await notificationModel.model.removeRequestContactReceivedNotification(currentUserId, contactId, notifTypeAddContact); 
+    resolve(true);
+  });
+};
+
+let approveRequestContactReceived = (currentUserId, contactId) =>{
+  return new Promise(async (resolve, reject)=>{
+    let approveReq = await contactModel.approveRequestContactReceived( currentUserId, contactId);
+    if ( approveReq.nModified === 0){
+      return reject(false);
+    }
+
+    // create notification 
+    let notificationItem = {
+      senderId: currentUserId,
+      receiverId: contactId,
+      type: notificationModel.types.APPROVE_CONTACT,
+    };
+    await notificationModel.model.createNew(notificationItem);
+    
     resolve(true);
   });
 };
@@ -228,6 +247,8 @@ module.exports = {
   findUsersContact: findUsersContact,
   addNew: addNew,
   removeRequestContactSent: removeRequestContactSent,
+  removeRequestContactReceived: removeRequestContactReceived,
+  approveRequestContactReceived: approveRequestContactReceived,
   getContacts: getContacts,
   getContactsSent: getContactsSent,
   getContactsReceived: getContactsReceived,
@@ -237,5 +258,4 @@ module.exports = {
   readMoreContacts: readMoreContacts,
   readMoreContactsSent: readMoreContactsSent,
   readMoreContactsReceived: readMoreContactsReceived,
-  removeRequestContactReceived: removeRequestContactReceived,
 };
