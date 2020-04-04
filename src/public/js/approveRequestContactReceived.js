@@ -27,6 +27,9 @@ function approveRequestContactReceived () {
           decreaseNumberNotifContact("count-request-contact-received"); // js/caculateNotifContact.js
           increaseNumberNotifContact("count-contacts");  // js/caculateNotifContact.js
           decreaseNumberNotification("noti_contact_counter", 1);  // js/caculateNotification.js
+
+          removeContact();
+          // xoa o chat(lam sau)
           
           socket.emit("approve-request-contact-received", {contactId: targetId});
         }
@@ -79,6 +82,8 @@ socket.on("response-approve-request-contact-received", function(user){
       </li>`;
 
   $("#contacts").find("ul").prepend(userInfoHtml);
+
+  removeContact(); 
 });
 $(document).ready(function(){
   approveRequestContactReceived();
