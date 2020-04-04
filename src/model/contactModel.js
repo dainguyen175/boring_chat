@@ -113,7 +113,9 @@ ContactSchema.statics = {
         {"contactId" : userId},
         {"status": false}
       ]
-    }, {"status" : true }).exec()
+    }, {"status" : true,
+        "updatedAt" : Date.now() 
+      }).exec()
   },
 
   /**
@@ -130,7 +132,7 @@ ContactSchema.statics = {
         ]},
         {"status": true }
       ]
-    }).sort({"createdAt" :-1}).limit(limit).exec();
+    }).sort({"updatedAt" :-1}).limit(limit).exec();
   },
 
   /**
@@ -216,7 +218,7 @@ ContactSchema.statics = {
         ]},
         {"status": true }
       ]
-    }).sort({"createdAt" :-1}).skip(skip).limit(limit).exec();
+    }).sort({"updatedAt" :-1}).skip(skip).limit(limit).exec();
   },
 
   /**
