@@ -68,7 +68,7 @@ ContactSchema.statics = {
           {"status": true}
         ]}
       ]
-    }, {"status": false}).exec();
+    }).exec();
   },
   
   /**
