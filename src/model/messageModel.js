@@ -18,6 +18,7 @@ let MessageSchema= new Schema({
     name: String,
     avatar: String
   },
+
   text: String,
   file: {data: Buffer, contentType: String, fileName: String},
   createdAt: {type: Number, default: Date.now},
@@ -26,6 +27,14 @@ let MessageSchema= new Schema({
 });
 
 MessageSchema.statics = {
+  /**
+   * Create new message
+   * @param {object} item 
+   */
+  createNew(item) {
+    return this.create(item);
+  },  
+  
   /**
    * get messages in personal (limit one time)
    * @param {string} senderId current user id
