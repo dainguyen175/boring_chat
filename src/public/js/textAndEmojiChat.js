@@ -12,7 +12,7 @@ function textAndEmojiChat (divId){
       let dataTextEmojiForSend = {
         uid: targetId,
         messageVal: messageVal 
-      }
+      } 
 
       if ($(`#write-chat-${divId}`).hasClass("chat-in-group")){
         dataTextEmojiForSend.isChatGroup= true;
