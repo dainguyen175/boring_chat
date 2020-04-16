@@ -20,13 +20,12 @@ function textAndEmojiChat (divId){
       
       // call send message
       $.post("/message/add-new-text-emoji", dataTextEmojiForSend, function(data){
-
         let dataToEmit = {
           message : data.message
         };
 
         // Step 1: handle message data before show
-        let messageOfMe = $(`<div class="bubble me data-mess-id="${data.message._id}"> </div>`);
+        let messageOfMe = $(`<div class="bubble me" data-mess-id="${data.message._id}"> </div>`);
         messageOfMe.text(data.message.text);
         // convert unicode emoji
         let convertEmojiMessage =emojione.toImage(messageOfMe.html()); // không muốn dùng 
@@ -88,7 +87,7 @@ $(document).ready( function (){
     let divId = "";
     
     // Step 1: handle message data before show
-    let messageOfYou = $(`<div class="bubble you data-mess-id="${response.message._id}"> </div>`);
+    let messageOfYou = $(`<div class="bubble you" data-mess-id="${response.message._id}"> </div>`);
     messageOfYou.text(response.message.text);
     // convert unicode emoji
     let convertEmojiMessage =emojione.toImage(messageOfYou.html()); // không muốn dùng 

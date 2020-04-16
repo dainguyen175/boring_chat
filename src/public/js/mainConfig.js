@@ -103,8 +103,11 @@ function gridPhotos(layoutNumber) {
     let href = $(this).attr("href");
     let modalImagesId = href.replace("#","");
 
+    let originDataImage =$(`#${modalImagesId}`).find("div.modal-body").html()
+
     let countRows = Math.ceil($(`#${modalImagesId}`).find("div.all-images>img").length / layoutNumber);
     let layoutStr = new Array(countRows).fill(layoutNumber).join("");
+
     $(`#${modalImagesId}`).find("div.all-images").photosetGrid({
       highresLinks: true,
       rel: "withhearts-gallery",
@@ -112,7 +115,7 @@ function gridPhotos(layoutNumber) {
       layout: layoutStr,
       onComplete: function() {
         $(`#${modalImagesId}`).find(".all-images").css({
-          "visibility": "visible"
+          "visibility": "visible" 
         });
         $(`#${modalImagesId}`).find(".all-images a").colorbox({
           photo: true,
@@ -121,6 +124,11 @@ function gridPhotos(layoutNumber) {
           maxWidth: "90%"
         });
       }
+    });
+
+    // Bắt sự kiện đóng modal 
+    $(`#${modalImagesId}`).on('hidden.bs.modal', function () {
+      $(this).find("div.modal-body").html(originDataImage);
     });
   });
 }
@@ -217,7 +225,7 @@ $(document).ready(function() {
 
   // Hiển thị hình ảnh grid slide trong modal tất cả ảnh, tham số truyền vào là số ảnh được hiển thị trên 1 hàng.
   // Tham số chỉ được phép trong khoảng từ 1 đến 5
-  gridPhotos(5);
+  gridPhotos(4);
 
   // Thêm người dùng vào danh sách liệt kê trước khi tạo nhóm trò chuyện
   addFriendsToGroup();
