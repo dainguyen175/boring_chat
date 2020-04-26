@@ -1,7 +1,3 @@
-/**
- * Created by https://trungquandev.com's author on 25/02/2018.
- */
-
 const socket = io();
 
 function nineScrollLeft() {
@@ -202,6 +198,9 @@ function changeScreenChat(){
 
     // Bật lắng nghe DOM cho việc chat tệp đính kèm
     attachmentChat(divId);
+
+    // Bật lắng nghe DOM của chat video
+    videoChat(divId);
   });
 }
 
@@ -255,4 +254,7 @@ $(document).ready(function() {
   // Click vào phần tử đầu tiên của cuộc trò chuyện khi load trang web
   $("ul.people").find("a")[0].click();
 
+  $("#video-chat-group").bind("click", function(){
+    alertify.notify("Tính năng đang được xây dựng. Vui lòng thử lại sau.", "error", 5 );
+  });
 });
