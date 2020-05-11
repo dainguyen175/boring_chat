@@ -42,7 +42,7 @@ $(document).ready(function(){
     config: {"iceServers": JSON.parse(iceServersList)},
     // debug: 3
   });
-
+  
   peer.on("open", function(peerId){
     getPeerId = peerId;
   }); 
