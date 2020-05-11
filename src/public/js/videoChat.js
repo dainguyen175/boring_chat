@@ -31,12 +31,15 @@ $(document).ready(function(){
     alertify.notify("Người dùng này hiện không hoạt động. ", "error", 5);
   });
 
+  let iceServersList = $("#ice-server-list").val();
+
   let getPeerId = "";
   const peer = new Peer({
     key: "peerjs",
     host: "peerjs-server-trungquandev.herokuapp.com",
     secure: true,
     port: 443,
+    config: {"iceServers": JSON.parse(iceServersList)},
     // debug: 3
   });
 
@@ -223,7 +226,7 @@ $(document).ready(function(){
 
         Swal.fire({
           type: "info",
-          title: `Đã kết thúc cuộc gọi với <span style="color: #2ECC71;">${response.listenerName}</span>!`,
+          title: `Đã kết thúc cuộc gọi với &nbsp; <span style="color: #2ECC71;">${response.listenerName}</span>!`,
           backdrop: "rgba(85, 85, 85, 0.4)",
           width: "52rem", 
           allowOutsideClick: false,
@@ -270,7 +273,7 @@ $(document).ready(function(){
 
           Swal.fire({
             type: "info",
-            title: `Đã kết thúc cuộc gọi với <span style="color: #2ECC71;">${response.callerName}</span>!`,
+            title: `Đã kết thúc cuộc gọi với &nbsp; <span style="color: #2ECC71;">${response.callerName}</span>!`,
             backdrop: "rgba(85, 85, 85, 0.4)",
             width: "52rem", 
             allowOutsideClick: false,
