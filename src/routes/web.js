@@ -48,7 +48,7 @@ let initRoutes = (app) => {
   router.put("/user/update-password", auth.checkLoggedIn, userValid.updatePassword ,user.updatePassword);
 
   
-  router.get("/contact/find-users/:keyword", auth.checkLoggedIn,contactValid.findUsersContact ,contact.findUsersContact)
+  router.get("/contact/find-users/:keyword", auth.checkLoggedIn,contactValid.findUsersContact ,contact.findUsersContact);
   router.post("/contact/add-new", auth.checkLoggedIn,contact.addNew);
   router.delete("/contact/remove-contact", auth.checkLoggedIn,contact.removeContact);
   router.delete("/contact/remove-request-contact-sent", auth.checkLoggedIn, contact.removeRequestContactSent);
@@ -57,7 +57,7 @@ let initRoutes = (app) => {
   router.get("/contact/read-more-contacts", auth.checkLoggedIn, contact.readMoreContacts);
   router.get("/contact/read-more-contacts-sent", auth.checkLoggedIn, contact.readMoreContactsSent);
   router.get("/contact/read-more-contacts-received", auth.checkLoggedIn, contact.readMoreContactsReceived);
-  
+  router.get("/contact/search-friends/:keyword", auth.checkLoggedIn,contactValid.searchFriends ,contact.searchFriends);
 
   router.get("/notifications/read-more", auth.checkLoggedIn, notification.readMore );
   router.put("/notification/mark-all-as-read", auth.checkLoggedIn, notification.markAllAsRead)
