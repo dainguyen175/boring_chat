@@ -119,8 +119,6 @@ let readMoreContactsSent = async (req, res) => {
   }
 };
 
-
-
 let readMoreContactsReceived = async (req, res) => {
   try {
     // get skip number from query param
@@ -130,6 +128,34 @@ let readMoreContactsReceived = async (req, res) => {
     return res.status(200).send(newContactUsers);
   } catch (error) {
     return res.status(500).send(error)
+  }
+};
+
+let searchFriends =async (req, res) =>{
+  let errorArr= [];
+  let validationErrors= validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    let errors =Object.values( validationErrors.mapped());
+    errors.forEach(item => {
+      errorArr.push(item.msg)
+    })
+
+    //Logging 
+    // console.log(errorArr);
+    return res.status(500).send(errorArr);
+  }
+
+  try {
+    let currentUserId = req.user._id;
+    let keyword = req.params.keyword;
+
+    let users = await contact.searchFriends(currentUserId, keyword); 
+
+    return res.render("main/groupChat/sections/_searchFriends", {users});
+  
+  } catch (error) {
+    return res.status(500).send(error);
   }
 };
 
@@ -143,5 +169,5 @@ module.exports = {
   readMoreContacts: readMoreContacts,
   readMoreContactsSent: readMoreContactsSent,
   readMoreContactsReceived: readMoreContactsReceived,
-  
+  searchFriends: searchFriends,
 };
