@@ -30,7 +30,7 @@ let addNew = (currentUserId, contactId) =>{
     let newContactItem = {
       userId: currentUserId,
       contactId: contactId
-    };
+    }; 
     
     let newContact = await contactModel.createNew(newContactItem);
 

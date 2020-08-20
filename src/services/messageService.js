@@ -14,7 +14,7 @@ const LIMIT_MESSAGES_TAKEN= 30;
  * Get all conversations
  * @param {string} currentUserId 
  */
-let getAllConversationItems = (currentUserId) => {
+let getAllConversationItems = (currentUserId) => {  
   return new Promise( async( resolve, reject) => {
     try {
       let contacts = await contactModel.getContacts(currentUserId, LIMIT_CONVERSATIONS_TAKEN);
