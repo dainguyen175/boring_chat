@@ -16,7 +16,7 @@ function addFriendsToGroup() {
 };
 
 function cancelCreateGroup() {
-  $("#cancel-group-chat").bind("click", function() {
+  $("#btn-cancel-group-chat").bind("click", function() {
     $("#groupChatModal .list-user-added").hide();
     if ($("ul#friends-added>li").length) {
       $("ul#friends-added>li").each(function(index) {
@@ -53,12 +53,55 @@ function callSearchFriends(element) {
 }
 
 function callCreateGroupChat() {
-  //
+  $("#btn-create-group-chat").unbind("click").on("click", function(){
+    let countUsers = $("ul#friends-added").find("li");
+    if (countUsers.length < 2) {
+      alertify. notify("Nhóm trò chuyện phải có tối thiểu 3 thành viên", "error", 5);
+      return false;
+    }
+
+    let groupChatName = $("#input-name-group-chat").val();
+    let regexGroupChatName = new RegExp(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/);
+
+    if(!regexGroupChatName.test(groupChatName)|| groupChatName.length <1 || groupChatName.length > 30){
+      alertify.notify("Tên nhóm giới hạn trong khoảng 1-30 ký tự và không được phép chứa ký tự đặc biệt.", "error", 7);
+      return false;
+    };  
+
+    let arrayIds =[];
+    $("ul#friends-added").find("li").each(function(index, item){
+      arrayIds.push({"userId": $(item).data("uid")});
+    });
+
+    Swal.fire({
+      title: `Bạn có muốn tạo nhóm &nbsp; <span style="color: #2ECC71;">${groupChatName}</span>?`,
+      type: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#2ECC71",
+      cancelButtonColor: "#ff7675",
+      confirmButtonText: "Xác nhận!",
+      cancelButtonText: "Huỷ",
+    }).then((result) => {
+      if (!result.value){
+        return false;
+      }
+      $.post("/group-chat/add-new", {
+        arrayIds: arrayIds,
+        groupChatName: groupChatName
+      }, function(data){
+        console.log(data.groupChat);
+      })
+      .fail(function(response){
+        alertify.notify(response.responseText, "error", 5);
+      });
+    }); 
+  });
 }
 
 
 $(document).ready(function() {
   $("#input-search-friends-to-add-group-chat").bind("keypress", callSearchFriends); 
   $("#btn-search-friends-to-add-group-chat").bind("click", callSearchFriends); 
+  callCreateGroupChat();
 })
 
