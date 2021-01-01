@@ -44,7 +44,7 @@ let register = (email, gender, password, protocol , host) => {
       //remove user
       await userModel.removeById(user._id);
       console.log(error);
-      reject(transMail.send_failed)
+      reject(transMail.send_failed);
     });
   });
 };

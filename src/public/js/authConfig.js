@@ -1,6 +1,3 @@
-/**
- * Created by https://trungquandev.com's author on 25/02/2018.
- */
 function showRegisterForm() {
     $('.loginBox').fadeOut('fast', function() {
       $('.registerBox').fadeIn('fast');
@@ -10,7 +7,6 @@ function showRegisterForm() {
       $('.modal-title').html('Đăng ký tài khoản');
     });
     $('.error').removeClass('alert alert-danger').html('');
-  
   }
   
   function showLoginForm() {
