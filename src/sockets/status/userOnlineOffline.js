@@ -12,6 +12,15 @@ let userOnlineOffline = (io) => {
       clients = pushSocketIdToArray(clients, group._id, socket.id);
     });
 
+    // when has new group chat
+    socket.on("new-group-created", (data) => { 
+      clients = pushSocketIdToArray(clients, data.groupChat._id, socket.id);
+    });
+
+    socket.on("member-received-group-chat", (data) => {
+      clients = pushSocketIdToArray(clients, data.groupChatId, socket.id);
+    });
+    
     let listUsersOnline = Object.keys(clients);
     //Step 1: Emit to user after login or F5 web page
     socket.emit("server-send-list-when-users-online", listUsersOnline);
